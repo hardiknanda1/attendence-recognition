@@ -194,7 +194,7 @@ export function ScrollHero() {
               {HEADLINES.map((text, i) => (
                 <motion.p
                   key={text}
-                  className="col-start-1 row-start-1 font-display text-[2.6rem] leading-[1.02] tracking-[-0.01em] text-white sm:text-6xl wide:text-6xl lg:wide:text-7xl xl:wide:text-[5.4rem] [@media(max-height:520px)]:!text-4xl"
+                  className="col-start-1 row-start-1 font-display text-[2.6rem] leading-[1.02] tracking-[-0.01em] text-paper sm:text-6xl wide:text-6xl lg:wide:text-7xl xl:wide:text-[5.4rem] [@media(max-height:520px)]:!text-4xl"
                   initial={false}
                   animate={{
                     opacity: phase === i ? 1 : 0,
