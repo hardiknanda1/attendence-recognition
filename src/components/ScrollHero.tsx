@@ -186,7 +186,7 @@ export function ScrollHero() {
         />
 
         <div className="container-page relative flex h-full flex-col justify-between pb-8 pt-24 wide:justify-center wide:gap-10 wide:pb-0 wide:pt-16">
-          <div className="ml-[10%] max-w-[36rem] xl:max-w-[40rem]">
+          <div className="max-w-[36rem] xl:max-w-[40rem]">
             <h1 className="sr-only">
               {siteConfig.name}: {HEADLINES[0]} {siteConfig.description}
             </h1>
@@ -212,7 +212,7 @@ export function ScrollHero() {
             </p>
           </div>
 
-          <div className="ml-[10%] flex flex-wrap items-center gap-x-7 gap-y-3">
+          <div className="flex flex-wrap items-center gap-x-7 gap-y-3">
             <Link
               href={siteConfig.contactHref}
               className={buttonClass(
