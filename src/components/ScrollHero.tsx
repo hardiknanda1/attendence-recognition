@@ -186,7 +186,7 @@ export function ScrollHero() {
         />
 
         <div className="container-page relative flex h-full flex-col justify-between pb-8 pt-24 wide:justify-center wide:gap-10 wide:pb-0 wide:pt-16">
-          <div className="max-w-[36rem] xl:max-w-[40rem]">
+          <div className="ml-[10%] max-w-[36rem] xl:max-w-[40rem]">
             <h1 className="sr-only">
               {siteConfig.name}: {HEADLINES[0]} {siteConfig.description}
             </h1>
@@ -194,7 +194,7 @@ export function ScrollHero() {
               {HEADLINES.map((text, i) => (
                 <motion.p
                   key={text}
-                  className="col-start-1 row-start-1 font-display text-[2.6rem] leading-[1.02] tracking-[-0.01em] text-paper sm:text-6xl wide:text-6xl lg:wide:text-7xl xl:wide:text-[5.4rem] [@media(max-height:520px)]:!text-4xl"
+                  className="col-start-1 row-start-1 font-display text-[2.6rem] leading-[1.02] tracking-[-0.01em] text-white sm:text-6xl wide:text-6xl lg:wide:text-7xl xl:wide:text-[5.4rem] [@media(max-height:520px)]:!text-4xl"
                   initial={false}
                   animate={{
                     opacity: phase === i ? 1 : 0,
@@ -212,7 +212,7 @@ export function ScrollHero() {
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-x-7 gap-y-3">
+          <div className="ml-[10%] flex flex-wrap items-center gap-x-7 gap-y-3">
             <Link
               href={siteConfig.contactHref}
               className={buttonClass(
