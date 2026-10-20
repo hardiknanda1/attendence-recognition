@@ -19,10 +19,11 @@ npm run build && npm start   # production
 | --- | --- |
 | `NEXT_PUBLIC_BRAND_NAME` | Brand name in navbar, footer, metadata (default `Lumen Attend`). Also editable in `src/config/site.ts`. |
 | `NEXT_PUBLIC_SITE_URL` | Absolute site URL for metadata. |
-| `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL` | Send contact submissions by email via Resend. |
+| `GMAIL_USER`, `GMAIL_APP_PASSWORD` | Send each submission to you from your Gmail, plus a confirmation email to the submitter. Optional: `CONTACT_TO_EMAIL` (defaults to `GMAIL_USER`), `CONTACT_SEND_CONFIRMATION=false`, `CONTACT_CONFIRMATION_MESSAGE`. |
+| `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL` | Or send contact submissions to you by email via Resend. |
 | `CONTACT_WEBHOOK_URL`, `CONTACT_WEBHOOK_TOKEN` | Or POST submissions as JSON to any webhook. |
 
-If no delivery service is configured, `/api/contact` still validates input but responds `503` and the form tells the user the message was **not** sent. It never reports success unless the provider accepted the message. To add another provider, extend `src/lib/contact-delivery.ts`.
+If several are configured, Gmail is used first, then Resend, then the webhook. If no delivery service is configured, `/api/contact` still validates input but responds `503` and the form tells the user the message was **not** sent. It never reports success unless the provider accepted the message. To add another provider, extend `src/lib/contact-delivery.ts`.
 
 ## Scroll-controlled hero
 

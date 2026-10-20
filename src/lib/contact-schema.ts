@@ -54,7 +54,7 @@ export type ContactSubmission = z.output<typeof contactSchema>;
 export type ContactField = keyof ContactSubmission;
 
 export type ContactResponse =
-  | { ok: true }
+  | { ok: true; confirmationSent?: boolean }
   | {
       ok: false;
       error: string;

@@ -62,6 +62,8 @@ export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [formError, setFormError] = useState<string | null>(null);
   const [errors, setErrors] = useState<Partial<Record<ContactField, string>>>({});
+  // Address a confirmation email was sent to, if the server sent one.
+  const [confirmedTo, setConfirmedTo] = useState<string | null>(null);
 
   const id = (name: string) => `${uid}-${name}`;
   const borderFor = (name: ContactField) =>
@@ -110,6 +112,7 @@ export function ContactForm() {
       const body = (await res.json().catch(() => null)) as ContactResponse | null;
 
       if (res.ok && body?.ok) {
+        setConfirmedTo(body.confirmationSent ? parsed.data.email : null);
         setStatus("success");
         formRef.current?.reset();
         return;
@@ -146,6 +149,12 @@ export function ContactForm() {
         <h2 className="mt-8 font-display text-4xl text-paper">Thank you — your message has been sent.</h2>
         <p className="mt-4 max-w-md leading-relaxed text-paper/70">
           A member of our team will reply to the email address you provided.
+          {confirmedTo && (
+            <>
+              {" "}
+              We&rsquo;ve also sent a confirmation to <span className="text-paper">{confirmedTo}</span>.
+            </>
+          )}
         </p>
         <button
           type="button"

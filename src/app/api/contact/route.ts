@@ -65,10 +65,10 @@ export async function POST(request: Request) {
 
   const result = await deliverContact(parsed.data);
 
-  if (result.status === "sent") return json({ ok: true }, 200);
+  if (result.status === "sent") return json({ ok: true, confirmationSent: result.confirmationSent ?? false }, 200);
 
   if (result.status === "not_configured") {
-    console.error("[contact] No delivery service configured. Set RESEND_* or CONTACT_WEBHOOK_URL (see .env.example).");
+    console.error("[contact] No delivery service configured. Set GMAIL_*, RESEND_* or CONTACT_WEBHOOK_URL (see .env.example).");
     return json(
       {
         ok: false,
