@@ -48,6 +48,13 @@ function renderHtml(data: ContactSubmission) {
   return `<div style="font-family:system-ui,sans-serif;font-size:14px;color:#111"><h2 style="font-weight:600">New enquiry via ${escapeHtml(siteConfig.name)}</h2><table>${body}</table></div>`;
 }
 
+/** Read an env var, tolerating whitespace and quotes pasted into a hosting dashboard. */
+function env(name: string) {
+  const value = process.env[name]?.trim();
+  if (!value) return undefined;
+  return value.replace(/^(["'])(.*)\1$/, "$2").trim() || undefined;
+}
+
 async function withTimeout(input: string, init: RequestInit, ms = 10_000) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), ms);
@@ -59,10 +66,10 @@ async function withTimeout(input: string, init: RequestInit, ms = 10_000) {
 }
 
 export async function deliverContact(data: ContactSubmission): Promise<DeliveryResult> {
-  const resendKey = process.env.RESEND_API_KEY?.trim();
-  const to = process.env.CONTACT_TO_EMAIL?.trim();
-  const from = process.env.CONTACT_FROM_EMAIL?.trim();
-  const webhook = process.env.CONTACT_WEBHOOK_URL?.trim();
+  const resendKey = env("RESEND_API_KEY");
+  const to = env("CONTACT_TO_EMAIL");
+  const from = env("CONTACT_FROM_EMAIL");
+  const webhook = env("CONTACT_WEBHOOK_URL");
 
   try {
     if (resendKey && to && from) {
@@ -83,7 +90,7 @@ export async function deliverContact(data: ContactSubmission): Promise<DeliveryR
     }
 
     if (webhook) {
-      const token = process.env.CONTACT_WEBHOOK_TOKEN?.trim();
+      const token = env("CONTACT_WEBHOOK_TOKEN");
       const res = await withTimeout(webhook, {
         method: "POST",
         headers: { "Content-Type": "application/json", ...(token ? { Authorization: `Bearer ${token}` } : {}) },
